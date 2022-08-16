@@ -2,17 +2,21 @@ import java.io.*;
 import java.util.*;
 class Solution {
     public int findDuplicate(int[] arr) {
-        int n = arr.length;
-        int sum =0;
-        for(int i =0; i< n; i++){
-            sum += arr[i];
-        }
+        int slow = arr[0];
+        int fast = arr[0];
         
-        for(int i =0; i<n-1; i++){
-            sum -= (i+1);
+        do{
+            slow = arr[slow];
+            fast = arr[arr[fast]];
         }
-        
-        return sum;
+        while(slow != fast);
+            
+        fast = arr[0];
+        while(slow != fast){
+            slow = arr[slow];
+            fast = arr[fast];
+        }
+        return slow;
     }
 }
 
